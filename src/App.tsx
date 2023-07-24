@@ -10,6 +10,7 @@ function App() {
   const [includeUpperCase,setIncludeUpperCase] = useState(false)
   const [includeNumbers,setIncludeNumbers] = useState(false)
   const [includeSymbols,setIncludeSymbols] = useState(false)
+  const [strengthStatus,setStrengthStatus] = useState("")
 
   const copyHandler = () =>{
     navigator.clipboard.writeText(password)
@@ -64,38 +65,46 @@ function App() {
       setString(applyFilters())
   },[includeLowerCase,includeUpperCase,includeNumbers,includeSymbols])
 
-  const getPasswordStrength = () =>{
-    let strength = 0
+  // const getPasswordStrength = () =>{
+  //   let strength = 0
 
-  if(password.length>6) 
-  if(password.length>8) 
-  if(password.length>10) 
+  // if(password.length>6) setStrength(5)
+  // if(password.length>8) setStrength(7)
+  // if(password.length>10) setStrength(10)
 
-  // Check for uppercase letters
-  if (/[A-Z]/.test(password)) {
-    strength += 1;
-  }
+  // // Check for uppercase letters
+  // if (/[A-Z]/.test(password)) {
+  //   strength += 1;
+  // }
 
-  // Check for lowercase letters
-  if (/[a-z]/.test(password)) {
-    strength += 1;
-  }
+  // // Check for lowercase letters
+  // if (/[a-z]/.test(password)) {
+  //   strength += 1;
+  // }
 
-  // Check for numbers
-  if (/[0-9]/.test(password)) {
-    strength += 1;
-  }
+  // // Check for numbers
+  // if (/[0-9]/.test(password)) {
+  //   strength += 1;
+  // }
 
-  // Check for symbols
-  if (/[!@#$%^&*()]/.test(password)) {
-    strength += 1;
-  }
-   setStrength(strength)
-  }
+  // // Check for symbols
+  // if (/[!@#$%^&*()]/.test(password)) {
+  //   strength += 1;
+  // }
+  //  setStrength(strength)
+  // }
 
-  useEffect(()=>{
-      getPasswordStrength()
-  },[password])
+  // useEffect(()=>{
+  //     getPasswordStrength()
+  // },[password])
+
+  // useEffect(()=>{
+  //    strength==1 && setStrengthStatus("Very-Weak")
+  //    strength == 2 && setStrengthStatus("Weak")
+  //    strength == 5  && setStrengthStatus("Medium")
+  //    strength ==7 && setStrengthStatus("Good")
+  //    strength == 10 && setStrengthStatus("Strong")
+  // },[strength])
 
   return (
     <>
@@ -117,7 +126,7 @@ function App() {
       <input type="checkbox" name="includeSymbols" onChange={handleCheckBox} checked={includeSymbols} />
       <label htmlFor="">Include Symbols</label>
       <br />
-      {strength!=0 && <h2>Strength {strength}</h2>}
+      {/* {strength!=0 && <h2>Strength {strengthStatus}</h2>} */}
       <button onClick={generatePassword} >Generate Password</button>
     </>
   )
