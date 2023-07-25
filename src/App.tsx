@@ -108,7 +108,9 @@ function App() {
 
   return (
     <>
+    <h2 className = "text-3xl font-bold underline">
     {password}
+    </h2>
     <button onClick={copyHandler} >Copy</button>
     <br />
     <h2>Character Length : {length}</h2>
