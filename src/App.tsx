@@ -2,7 +2,6 @@ import { ChangeEvent, useEffect, useState } from "react"
 
 const Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789!@#$%^&*()"
 function App() {
-  const [strength,setStrength] = useState(0)
   const [password,setPassword] = useState("")
   const [length,setLength] = useState(4)
   const [string,setString] = useState(Characters)
@@ -11,6 +10,7 @@ function App() {
   const [includeNumbers,setIncludeNumbers] = useState(false)
   const [includeSymbols,setIncludeSymbols] = useState(false)
   const [strengthStatus,setStrengthStatus] = useState("")
+  const [show,setShow] = useState(false)
 
   const copyHandler = () =>{
     navigator.clipboard.writeText(password)
@@ -29,6 +29,7 @@ function App() {
      pass += string[indexRandom]
     }
     setPassword(pass)
+    setShow(true)
   }
 
   const applyFilters = () : string =>{
@@ -107,30 +108,31 @@ function App() {
   // },[strength])
 
   return (
-    <>
-    <h2 className = "text-3xl font-bold underline">
+    <div className="flex flex-col gap-4 w-2/5 p-8">
+      <div>
+    <label className = "text-3xl font-bold mr-80">
     {password}
-    </h2>
-    <button onClick={copyHandler} >Copy</button>
+    </label>
+    {show && 
+    <button  className="bg-blue-500 text-white px-4 py-2 rounded-xl w-fit" onClick={copyHandler} >Copy</button>
+  }
+  </div>
     <br />
     <h2>Character Length : {length}</h2>
       <input type="range" min="4" max="16" value={length} onChange={e=>setLength(+e.target.value)}/>
-      <br />
-      <input type="checkbox" name="includeUpperCase" onChange={handleCheckBox} checked={includeUpperCase} />
+      <div className="grid grid-cols-2 gap-4">
       <label htmlFor="">Include UpperCase Letters</label>
-      <br />
-      <input type="checkbox" name="includeNumbers" checked={includeNumbers} onChange={handleCheckBox} />
+      <input type="checkbox" className="h-4" name="includeUpperCase" onChange={handleCheckBox} checked={includeUpperCase} />
       <label htmlFor="">Include Numbers</label>
-      <br />
-      <input type="checkbox" name="includeLowerCase" onChange={handleCheckBox} checked={includeLowerCase} />
+      <input type="checkbox" className="h-4" name="includeNumbers" checked={includeNumbers} onChange={handleCheckBox} />
       <label htmlFor="">Include Lowercase Letters</label>
-      <br />
-      <input type="checkbox" name="includeSymbols" onChange={handleCheckBox} checked={includeSymbols} />
+      <input type="checkbox" className="h-4" name="includeLowerCase" onChange={handleCheckBox} checked={includeLowerCase} />
       <label htmlFor="">Include Symbols</label>
-      <br />
+      <input type="checkbox" className="h-4" name="includeSymbols" onChange={handleCheckBox} checked={includeSymbols} />
+      </div>
       {/* {strength!=0 && <h2>Strength {strengthStatus}</h2>} */}
-      <button onClick={generatePassword} >Generate Password</button>
-    </>
+      <button className="rounded-full bg-lime-700 w-fit p-3 text-white m-auto mt-5" onClick={generatePassword}>Generate Password</button>
+    </div>
   )
 }
 
